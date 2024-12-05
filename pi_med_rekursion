@@ -9,19 +9,15 @@ public class pi_med_rekursion {
     private static double[] procent_of_Pi;
 
     public static void main(String args[])  {
-    
         n();
-            
         
         a = new double[n + 1];
         O = new double[n + 1];
         procent_of_Pi = new double[n + 1];
 
-        
         a = calca(n);
         O = calcO(n, a);
         procent_of_Pi = calcPi(O);
-
         
         print();
     }
@@ -33,51 +29,38 @@ public class pi_med_rekursion {
         return n;
     }
 
-    
     public static double[] calca(int n) {
-    
-        k = 0;
-    
-        while(k <= n) {
-            a[k] = Math.sqrt(2 - 2 * Math.sqrt(1 - (1 / (Math.pow(2, (2 * k - 1))))));
-            k++;
+        double[] a = new double[n + 1];
+        a[0] = 2; 
+
+        for (int k = 1; k <= n; k++) {
+            a[k] = Math.sqrt(2 - 2 * Math.sqrt(1 - Math.pow(a[k - 1] / 2, 2))); 
         }
-        return a; 
+
+        return a;
     }
-    
 
-   
     public static double[] calcO(int n, double[] a) {
-        
         k = 0;
-
         while(k <= n) {
-            O[k] = a[k] * Math.pow(2, (2 + k));
+            O[k] = Math.pow(2, k) * a[k];
             k++;
         }
         return O;  
     }
-
-    
+   
     public static double[] calcPi(double[] O) {
-        
         k = 0;
-        
         while(k <= n) {
-            procent_of_Pi[k] = Math.abs(O[k] - Math.PI);  
+            procent_of_Pi[k] = Math.abs(O[k] - Math.PI);
             k++;
         }
         return procent_of_Pi;
     }
-
     
     public static void print() {
-        for (int i = 0; i <= n; i++) {
-            if (i == 0) {
-                System.out.println("När n är 0 är a = 1.4142135623730951, och O = 2.828427124746190 vilket är 0.3131655288436032 ifrån π.");
-            } else {
+        for (int i = 0; i <= n; i++) {                                                                                           
             System.out.println("När n är " + i + " är a = " + a[i] + ", och O = " + O[i] + " vilket är " + procent_of_Pi[i] + " ifrån π.");
-            }
         }
     }
 }
