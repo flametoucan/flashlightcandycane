@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class pi_med_rekursion {
+
+    private static int k = 0;
+    private static int n;
+    private static double[] a;
+    private static double[] O; 
+    private static double[] procent_of_Pi;
+
+    public static void main(String args[])  {
+    
+        n();
+            
+        
+        a = new double[n + 1];
+        O = new double[n + 1];
+        procent_of_Pi = new double[n + 1];
+
+        
+        a = calca(n);
+        O = calcO(n, a);
+        procent_of_Pi = calcPi(O);
+
+        
+        print();
+    }
+            
+    public static int n() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Vad ska n vara?");
+        n = input.nextInt();
+        return n;
+    }
+
+    
+    public static double[] calca(int n) {
+    
+        k = 0;
+    
+        while(k <= n) {
+            a[k] = Math.sqrt(2 - 2 * Math.sqrt(1 - (1 / (Math.pow(2, (2 * k - 1))))));
+            k++;
+        }
+        return a; 
+    }
+    
+
+   
+    public static double[] calcO(int n, double[] a) {
+        
+        k = 0;
+
+        while(k <= n) {
+            O[k] = a[k] * Math.pow(2, (2 + k));
+            k++;
+        }
+        return O;  
+    }
+
+    
+    public static double[] calcPi(double[] O) {
+        
+        k = 0;
+        
+        while(k <= n) {
+            procent_of_Pi[k] = Math.abs(O[k] - Math.PI);  
+            k++;
+        }
+        return procent_of_Pi;
+    }
+
+    
+    public static void print() {
+        for (int i = 0; i <= n; i++) {
+            if (i == 0) {
+                System.out.println("När n är 0 är a = 1.4142135623730951, och O = 2.828427124746190 vilket är 0.3131655288436032 ifrån π.");
+            } else {
+            System.out.println("När n är " + i + " är a = " + a[i] + ", och O = " + O[i] + " vilket är " + procent_of_Pi[i] + " ifrån π.");
+            }
+        }
+    }
+}
