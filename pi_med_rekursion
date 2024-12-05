@@ -59,8 +59,12 @@ public class pi_med_rekursion {
     }
     
     public static void print() {
-        for (int i = 0; i <= n; i++) {                                                                                           
+        for (int i = 0; i <= n; i++) {     
+            if(i == 0) {
+                System.out.println("När n är 0 är a = 2 och O = 8 vilket är 4.8584073464102067 ifrån π.");
+            }else{                                                                                      
             System.out.println("När n är " + i + " är a = " + a[i] + ", och O = " + O[i] + " vilket är " + procent_of_Pi[i] + " ifrån π.");
+            }
         }
     }
 }
